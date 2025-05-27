@@ -8,7 +8,8 @@ import {
   FormArray,
 } from '@angular/forms';
 import { AddressesService } from '../../services/addresses.service';
-import { IAddress } from '../../services/Models/IAddress';
+import { IAddress, IEaddress } from '../../services/Models/IAddress';
+import { IAddressForm, IRegisterForm } from '../../services/Models/IRegisterForm';
 @Component({
   selector: 'app-register-address',
   standalone: true,
@@ -53,10 +54,10 @@ export class RegisterAddressComponent implements OnInit {
   }
 
   initializeForms(): void {
-    this.registerAddress = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(5)]],
-      lastName: [''],
-      email: [
+    this.registerAddress = this.fb.group<IRegisterForm>({
+      firstName: this.fb.nonNullable.control('', [Validators.required, Validators.minLength(5)]),
+      lastName: this.fb.nonNullable.control(''),
+      email: this.fb.nonNullable.control(
         '',
         [
           Validators.required,
@@ -64,20 +65,20 @@ export class RegisterAddressComponent implements OnInit {
             /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
           ),
         ],
-      ],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      addresses: this.fb.array([]),
+      ),
+      phoneNumber: this.fb.nonNullable.control(0, [Validators.required, Validators.pattern('^[0-9]*$')]),
+      addresses: this.fb.nonNullable.array<FormGroup<IAddressForm>>([]),
     });
   }
 
   addressesGroup(): FormGroup {
-    return this.fb.group({
-      stateName: ['', [Validators.required]],
-      cityName: ['', [Validators.required]],
-      pinCode: ['', [Validators.required]],
-      doorNumber: ['', [Validators.required]],
-      street: [''],
-      landMark: [''],
+    return this.fb.group<IAddressForm>({
+      stateName: this.fb.nonNullable.control('', [Validators.required]),
+      cityName: this.fb.nonNullable.control('', [Validators.required]),
+      pinCode: this.fb.nonNullable.control('', [Validators.required]),
+      doorNumber: this.fb.nonNullable.control('', [Validators.required]),
+      street: this.fb.nonNullable.control(''),
+      landMark: this.fb.nonNullable.control(''),
     });
   }
 
