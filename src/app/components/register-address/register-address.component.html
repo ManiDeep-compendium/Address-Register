@@ -1,0 +1,114 @@
+<div class="container mt-5">
+  <form class="row g-3" [formGroup]="registerAddress" (ngSubmit)="onFormSubmit()">
+    <div class="col-md-6">
+      <label class="form-label">FirstName*</label>
+      <input type="email" class="form-control" formControlName="firstName">
+      <div *ngIf="getFormFieldValidation(registerAddress,'firstName')">
+        <p *ngIf="formFieldErrorByType(registerAddress,'firstName','required')" class="text-danger"> FirstName Is
+          Required to Submit</p>
+
+        <p *ngIf="formFieldErrorByType(registerAddress,'firstName','minlength')" class="text-danger"> FirstName Should
+          Contain Minimum 5 Letters</p>
+
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">LastName</label>
+      <input type="text" class="form-control" formControlName="lastName">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Email*</label>
+      <input type="text" class="form-control" placeholder="Enter Email" formControlName="email">
+
+      <div *ngIf="getFormFieldValidation(registerAddress,'email')">
+        <p *ngIf="formFieldErrorByType(registerAddress,'email','required')" class="text-danger"> Email Is Required to
+          Submit</p>
+
+        <p *ngIf="formFieldErrorByType(registerAddress,'email','pattern')" class="text-danger"> Enter Valid Email</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">PhoneNumber*</label>
+      <input type="text" class="form-control" placeholder="Enter PhoneNumber" formControlName="phoneNumber">
+
+      <div *ngIf="getFormFieldValidation(registerAddress,'phoneNumber')">
+        <p *ngIf="formFieldErrorByType(registerAddress,'phoneNumber','required')" class="text-danger"> PhoneNumber Is
+          Required to Submit</p>
+
+        <p *ngIf="formFieldErrorByType(registerAddress,'phoneNumber','pattern')" class="text-danger"> Enter Valid
+          PoneNumber</p>
+      </div>
+
+    </div>
+    <div formArrayName="addresses">
+      <ng-container *ngFor="let address of addresses.controls; let i = index">
+        <div class="mt-3 d-flex justify-content-between">
+          <h5 class="f-16">Address Details - {{i + 1}} </h5>
+          <button type="button" class="btn btn-danger" (click)="deleteAddress(i)"> - Delete Address {{ i+1 }}</button>
+        </div>
+        <div class="mt-4" [formGroupName]="i">
+          <div class="row ">
+            <div class="col-md-6">
+              <label class="form-label">StateName*</label>
+              <input type="text" class="form-control" placeholder="Enter State" formControlName="stateName">
+
+              <div *ngIf="getFormFieldValidation(address,'stateName')">
+                <p *ngIf="formFieldErrorByType(address,'stateName','required')" class="text-danger">
+                  StateName Is Required to Submit</p>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">CityName*</label>
+              <input type="text" class="form-control" formControlName="cityName">
+
+              <div *ngIf="getFormFieldValidation(address,'cityName')">
+                <p *ngIf="formFieldErrorByType(address,'cityName','required')" class="text-danger">
+                  CityName Is Required to Submit</p>
+              </div>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <label class="form-label">PinCode*</label>
+              <input type="text" class="form-control" formControlName="pinCode">
+
+              <div *ngIf="getFormFieldValidation(address,'pinCode')">
+                <p *ngIf="formFieldErrorByType(address,'pinCode','required')" class="text-danger">
+                  CityName Is Required to Submit</p>
+              </div>
+
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">DoorNumber*</label>
+              <input type="text" class="form-control" formControlName="doorNumber">
+
+              <div *ngIf="getFormFieldValidation(address,'doorNumber')">
+                <p *ngIf="formFieldErrorByType(address,'doorNumber','required')" class="text-danger">
+                  CityName Is Required to Submit</p>
+              </div>
+
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Street</label>
+              <input type="text" class="form-control" formControlName="street">
+            </div>
+          </div>
+          <div class="col-12">
+            <label class="form-label">landMark</label>
+            <input type="text" class="form-control" formControlName="landMark">
+          </div>
+        </div>
+      </ng-container>
+      <div class="col-12 mt-3">
+        <button type="button" class="btn btn-warning" (click)="addAddress()">Add Addresses</button>
+      </div>
+    </div>
+
+    <div class="col-12 text-end">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+  </form>
+</div>

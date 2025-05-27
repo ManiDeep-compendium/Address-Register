@@ -1,0 +1,28 @@
+{
+  "RegisteredAddresses": 
+    {
+      "id":1,
+      "firstName": "Manideep",
+      "lastName": "Gudivada",
+      "email": "manideepg@gmail.com",
+      "phoneNumber": "9014178565",
+      "addresses": [
+        {
+          "stateName": "Andhra pradhesh",
+          "cityName": "Guntur",
+          "pinCode": "522307",
+          "doorNumber": "3-101",
+          "street": "Alla street",
+          "landMark": "behind union bank"
+        },
+        {
+          "stateName": "telangana",
+          "cityName": "madeenaguda",
+          "pinCode": "500009",
+          "doorNumber": "98",
+          "street": "Ushodaya Enclave",
+          "landmark": "near silver river school"
+        }
+      ]
+    }
+}
